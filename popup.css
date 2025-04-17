@@ -1,0 +1,569 @@
+:root {
+  --primary: #6c5ce7;
+  --primary-light: #a29bfe;
+  --secondary: #00cec9;
+  --dark: #2d3436;
+  --darker: #1a1e1f;
+  --light: #f5f6fa;
+  --success: #00b894;
+  --danger: #d63031;
+  --warning: #fdcb6e;
+  --info: #0984e3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--darker);
+  color: var(--light);
+  padding: 0;
+}
+
+.app-container {
+  padding: 15px;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 22px;
+  color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 5px;
+}
+
+.card {
+  background: rgba(45, 52, 54, 0.7);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.search-section {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.search-box input:focus {
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.search-box button {
+  padding: 0 15px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.search-box button:hover {
+  background: var(--primary-light);
+}
+
+.suggestions {
+  position: absolute;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  background: var(--dark);
+  border-radius: 0 0 8px 8px;
+  z-index: 100;
+  display: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-top: none;
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.suggestion-item:hover {
+  background: var(--primary);
+}
+
+.suggestion-item .coin-symbol {
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+}
+
+.coin-data {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.coin-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.coin-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.coin-symbol {
+  font-size: 14px;
+  color: var(--primary-light);
+}
+
+.price-display {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.price-change {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.positive {
+  background: rgba(0, 184, 148, 0.2);
+  color: var(--success);
+}
+
+.negative {
+  background: rgba(214, 48, 49, 0.2);
+  color: var(--danger);
+}
+
+.signal {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.buy {
+  background: rgba(0, 184, 148, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.sell {
+  background: rgba(214, 48, 49, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.hold {
+  background: rgba(253, 203, 110, 0.2);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+/* Fear & Greed Meter */
+.fear-greed-card {
+  background: linear-gradient(135deg, rgba(45,52,54,0.7) 0%, rgba(26,30,31,0.8) 100%);
+}
+
+.meter-container {
+  margin: 20px 0;
+}
+
+.meter-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+}
+
+.meter {
+  height: 8px;
+  width: 100%;
+  background: linear-gradient(to right, 
+    #ff0000 0%, 
+    #ff5a00 20%, 
+    #ff9a00 40%, 
+    #ffce00 60%, 
+    #f2ff00 80%, 
+    #00ff00 100%);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.meter-indicator {
+  position: absolute;
+  top: -4px;
+  width: 3px;
+  height: 16px;
+  background: white;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.8);
+  transition: left 0.5s ease;
+}
+
+.meter-value {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.meter-description {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.advice-box {
+  background: rgba(0,0,0,0.2);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Favorites */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--primary-light);
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-btn:hover {
+  color: white;
+}
+
+.favorites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.favorite-item {
+  background: rgba(108, 92, 231, 0.15);
+  color: var(--primary-light);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid rgba(108, 92, 231, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.favorite-item:hover {
+  background: rgba(108, 92, 231, 0.3);
+}
+
+.favorite-item i {
+  font-size: 10px;
+}
+
+/* Top Coins */
+.coins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coin-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.coin-row:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.coin-rank {
+  width: 24px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+}
+
+.coin-row-icon {
+  width: 24px;
+  height: 24px;
+  margin: 0 10px;
+  border-radius: 50%;
+}
+
+.coin-row-name {
+  flex: 1;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coin-row-symbol {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-left: 5px;
+}
+
+.coin-row-price {
+  font-size: 13px;
+  font-weight: 500;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.coin-row-change {
+  font-size: 12px;
+  width: 60px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* News */
+.news-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-item {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-title {
+  font-size: 14px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.news-title a {
+  color: var(--light);
+  text-decoration: none;
+}
+
+.news-title a:hover {
+  color: var(--primary-light);
+}
+
+.news-source {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.news-date {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Summary */
+.summary-content {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.summary-content p {
+  margin-bottom: 8px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+}
+
+.tab-btn.active {
+  color: var(--primary-light);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary-light);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Loading states */
+.loading {
+  text-align: center;
+  padding: 30px 0;
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading i {
+  font-size: 24px;
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  body {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .app-container {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .coin-name {
+    font-size: 16px;
+  }
+
+  .price-display {
+    font-size: 24px;
+  }
+
+  .coin-row-name, .coin-row-price {
+    font-size: 12px;
+  }
+
+  .coin-row-change {
+    width: 50px;
+    font-size: 11px;
+  }
+
+  .news-title {
+    font-size: 13px;
+  }
+
+  .summary-content {
+    font-size: 12px;
+  }
+}
